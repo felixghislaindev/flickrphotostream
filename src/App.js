@@ -34,7 +34,7 @@ function App() {
     <div className="flickr-photo-cards">
     {
       flickrPhotos.map((flickrPhoto, index) =>(
-      <FlickrPhotoCard className="flick-foto-card" key={index} index={index} card={flickrPhoto}/>
+      <FlickrPhotoCard className="flick-foto-card" key={index} index={index} photo={flickrPhoto}/>
       ))
       }
     </div>
