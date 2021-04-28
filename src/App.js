@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Card from './components/card/Card-component'
+import FlickrPhotoCard from './components/card/FlickrPhotoCard'
 
 function App() {
   const [flickrPhotos,setFlickrPhotos] = React.useState([
@@ -31,10 +31,10 @@ function App() {
   ])
   return (
     <div className="App">
-    <div className="flickr-photo-card">
+    <div className="flickr-photo-cards">
     {
       flickrPhotos.map((flickrPhoto, index) =>(
-      <Card key={index} index={index} card={flickrPhoto}/>
+      <FlickrPhotoCard className="flick-foto-card" key={index} index={index} card={flickrPhoto}/>
       ))
       }
     </div>

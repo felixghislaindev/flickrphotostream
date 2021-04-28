@@ -4,3 +4,19 @@
   height: 100vh;
   padding: 30px;
 }
+.flickr-photo-cards {
+  display: grid;
+  margin: 10px;
+  grid-gap: 1rem;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .flickr-photo-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .flickr-photo-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+} ;
