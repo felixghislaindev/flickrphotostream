@@ -37,6 +37,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+      <h1>Flickr Photo Stream</h1>
       <div className="flickr-photo-cards">
         {this.state.flickrphotos.map((flickrPhoto, index) =>(
       <FlickrPhotoCard key={v4()} index={index} photo={flickrPhoto}/>
