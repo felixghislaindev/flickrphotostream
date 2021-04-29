@@ -1,46 +1,50 @@
 import './App.css';
 import React from 'react';
+import axios from 'axios'
+import { v4 } from 'uuid';
 import FlickrPhotoCard from './components/card/FlickrPhotoCard'
 
-function App() {
-  const [flickrPhotos,setFlickrPhotos] = React.useState([
-    {
-      "title":"in the park",
-      "author":"Mike",
-      "description":"Nice walk at the park",
-      "tags":["run","walk","morning"]
-  },
-  {
-    "title":"in the forest",
-    "author":"Marta",
-    "description":"Nice walk at the rainy forest",
-    "tags":["run","walk","morning coffee"]
-},
-{
-  "title":"in the sun ",
-  "author":"jsosh",
-  "description":"Nice walk on the beach",
-  "tags":["run","walk","barcelona","sun"]
-},
-{
-  "title":"cold mornings",
-  "author":"Fabian",
-  "description":"Snowy morning",
-  "tags":["run","walk","cold","coffee"]
-}
-  ])
-  return (
-    <div className="App">
-    <div className="flickr-photo-cards">
-    {
-      flickrPhotos.map((flickrPhoto, index) =>(
-      <FlickrPhotoCard className="flick-foto-card" key={index} index={index} photo={flickrPhoto}/>
-      ))
-      }
-    </div>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flickrphotos:[]
+    };
+  }
+
+  
+
+  componentDidMount() {
+    const api = axios.create({
+      withCredentials: false,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
       
-    </div>
-  );
+    })
+   
+    api.get('/services/feeds/photos_public.gne?format=json&nojsoncallback=true')
+    .then(res => {
+      this.setState(() => {
+        return {flickrphotos:res.data.items}
+      })
+    })
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+      <div className="flickr-photo-cards">
+        {this.state.flickrphotos.map((flickrPhoto, index) =>(
+      <FlickrPhotoCard key={v4()} index={index} photo={flickrPhoto}/>
+      ))}
+      </div>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default App
